@@ -1,0 +1,76 @@
+﻿<Window x:Class="AutoserviceMI.Filtrare_Reparatii"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Filtrare Reparatii" Height="574" Width="500">
+
+    <Window.Resources>
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="DatePicker">
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Filtrare Reparatii"
+                   FontSize="24" FontWeight="Bold"
+                   HorizontalAlignment="Center"/>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+
+            <TextBlock Text="Client"/>
+            <ComboBox x:Name="ComboClient"
+                      DisplayMemberPath="Nume"
+                      SelectedValuePath="Id"/>
+
+            <TextBlock Text="Vehicul"/>
+            <ComboBox x:Name="ComboVehicul"
+                      DisplayMemberPath="NumarInmatriculare"
+                      SelectedValuePath="Id"/>
+
+            <TextBlock Text="Status"/>
+            <ComboBox x:Name="ComboStatus">
+                <ComboBoxItem Content="In asteptare"/>
+                <ComboBoxItem Content="In lucru"/>
+                <ComboBoxItem Content="Finalizata"/>
+            </ComboBox>
+
+            <TextBlock Text="Tip interventie"/>
+            <ComboBox x:Name="ComboTipInterventie"
+                      DisplayMemberPath="TipInterventie"/>
+
+            <TextBlock Text="Data start dupa:"/>
+            <DatePicker x:Name="DataStart"/>
+
+            <TextBlock Text="Data start inainte de:"/>
+            <DatePicker x:Name="DataEnd"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Filtreaza" Style="{StaticResource RoundedButton}" Click="Filtreaza_Click"/>
+            <Button Content="Reset" Style="{StaticResource RoundedButton}" Click="Reset_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,168 @@
+﻿<Window x:Class="AutoserviceMI.Programari"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoserviceMI"
+        mc:Ignorable="d"
+        Title="Programări"
+        Height="600" Width="1089"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="15"
+                                BorderBrush="Gray"
+                                BorderThickness="1"
+                                Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#B0BEC5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Background="LightGray" CornerRadius="15"
+                Padding="10" Margin="-20,60,0,-10" Grid.RowSpan="3">
+            <StackPanel VerticalAlignment="Top">
+                <Button Content="Adaugare" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Adaugare_Click"/>
+                <Button Content="Modificare" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Modificare_Click"/>
+                <Button Content="Stergere" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Stergere_Click"/>
+                <Button Content="În progres" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="InProgres_Click"/>
+                <Button Content="Finalizare" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Finalizare_Click"/>
+                <Image Source="/Resources/programari.png" Width="100" Margin="40"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2"
+                Background="LightGray" CornerRadius="15"
+                Margin="-20,0,470,0" Padding="10">
+            <DockPanel>
+                <TextBlock Text="Programări  ||  Planificare Service"
+                           Foreground="White" FontSize="20" FontWeight="Bold"
+                           Margin="20,0,0,0"/>
+                <Image Source="/Resources/programari.png" Width="50" Margin="10,0,0,0"/>
+            </DockPanel>
+        </Border>
+
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <StackPanel Margin="10">
+                <Label Content="Client" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterClient"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Label Content="Vehicul" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterVehicul"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Label Content="Data" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterData"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Label Content="Stare" HorizontalAlignment="Center"/>
+                <ComboBox x:Name="FilterStare">
+                    <ComboBoxItem Content="Toate"/>
+                    <ComboBoxItem Content="Planificată"/>
+                    <ComboBoxItem Content="În progres"/>
+                    <ComboBoxItem Content="Finalizată"/>
+                    <ComboBoxItem Content="Anulată"/>
+                </ComboBox>
+            </StackPanel>
+
+            <Button Content="Filtrare"
+                    Style="{StaticResource RoundedButton}"
+                    Background="#A9A9A9"
+                    Margin="10"
+                    Click="Filtrare_Click"/>
+
+        </StackPanel>
+        <Border Grid.Row="2" Grid.Column="1"
+                Background="White" CornerRadius="10"
+                Padding="10" BorderBrush="LightGray" BorderThickness="1">
+
+            <DataGrid x:Name="ProgramariDataGrid"
+                      AutoGenerateColumns="False"
+                      SelectionMode="Single"
+                      CanUserAddRows="False"
+                      IsReadOnly="True">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Client" Binding="{Binding Client.Nume}" Width="150"/>
+                    <DataGridTextColumn Header="Vehicul" Binding="{Binding Vehicul.NumarInmatriculare}" Width="150"/>
+                    <DataGridTextColumn Header="Data" Binding="{Binding DataProgramare}" Width="140"/>
+                    <DataGridTextColumn Header="Tip intervenție" Binding="{Binding TipInterventie}" Width="180"/>
+                    <DataGridTextColumn Header="Mecanic" Binding="{Binding Mecanic}" Width="130"/>
+                    <DataGridTextColumn Header="Stare" Binding="{Binding Stare}" Width="120"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </Border>
+
+
+        <Button Content="Home"
+                Style="{StaticResource RoundedButton}"
+                Width="100" Background="#A9A9A9"
+                HorizontalAlignment="Right"
+                Grid.Column="1"
+                Margin="0,10,20,0"
+                Click="Home_Click"/>
+
+    </Grid>
+</Window>

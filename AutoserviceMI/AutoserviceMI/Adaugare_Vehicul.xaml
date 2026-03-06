@@ -1,0 +1,139 @@
+﻿<Window x:Class="AutoserviceMI.Adaugare_Vehicul"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Adăugare vehicul"
+        Height="666" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Width" Value="220"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="15"
+                                BorderBrush="Gray"
+                                BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="#B0BEC5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#4CAF50"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="LightGray" CornerRadius="15">
+            <DockPanel>
+                <TextBlock Text="Adăugare vehicul"
+                           Foreground="White"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           DockPanel.Dock="Bottom"
+                           HorizontalAlignment="Center"/>
+                <Image Source="/Resources/masina.png"
+                       DockPanel.Dock="Left"
+                       Width="50"
+                       HorizontalAlignment="Center"/>
+            </DockPanel>
+        </Border>
+
+        <DockPanel Grid.Row="1">
+            <TextBlock Text="Număr înmatriculare"
+                       FontSize="20"
+                       DockPanel.Dock="Top"
+                       HorizontalAlignment="Center"/>
+            <TextBox x:Name="NrTextBox"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="2">
+            <TextBlock Text="Marca"
+                       FontSize="20"
+                       DockPanel.Dock="Top"
+                       HorizontalAlignment="Center"/>
+            <TextBox x:Name="MarcaTextBox"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3">
+            <TextBlock Text="Model"
+                       FontSize="20"
+                       DockPanel.Dock="Top"
+                       HorizontalAlignment="Center"/>
+            <TextBox x:Name="ModelTextBox"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="4">
+            <TextBlock Text="VIN"
+                       FontSize="20"
+                       DockPanel.Dock="Top"
+                       HorizontalAlignment="Center"/>
+            <TextBox x:Name="VINTextBox"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="5">
+            <TextBlock Text="Proprietar"
+                       FontSize="20"
+                       DockPanel.Dock="Top"
+                       HorizontalAlignment="Center"/>
+            <ComboBox x:Name="ClientCombo"/>
+        </DockPanel>
+
+        <Button Grid.Row="6"
+                Style="{StaticResource RoundedButton}"
+                Click="AdaugareVehicul_Click">
+            <TextBlock Text="Adaugă vehicul"
+                       FontSize="18"
+                       Foreground="White"
+                       HorizontalAlignment="Center"/>
+        </Button>
+
+    </Grid>
+
+</Window>

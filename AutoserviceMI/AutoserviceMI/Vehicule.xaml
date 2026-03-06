@@ -1,0 +1,136 @@
+﻿<Window x:Class="AutoserviceMI.Vehicule"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Vehicule" Height="600" Width="1093"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Width" Value="120"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="15"
+                                BorderBrush="Gray" BorderThickness="1" Padding="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#B0BEC5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Background="LightGray" CornerRadius="15"
+                Padding="10" Margin="-20,60,0,0" Grid.RowSpan="3">
+            <StackPanel VerticalAlignment="Top">
+                <Button Content="Adaugare" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Adaugare_Click"/>
+                <Button Content="Modificare" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Modificare_Click"/>
+                <Button Content="Stergere" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Stergere_Click"/>
+                <Button Content="Filtrare" Style="{StaticResource RoundedButton}" Background="#A9A9A9" Click="Filtrare_Click"/>
+                <Image Source="/Resources/vehicul.png" Width="100" Margin="40"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="LightGray"
+                CornerRadius="15" Margin="-20,0,470,0" Padding="10">
+            <DockPanel>
+                <TextBlock Text="Vehicule  ||  Lista vehicule"
+                           Foreground="White"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="20,0,0,0"/>
+                <Image Source="/Resources/masina.png" Width="40"/>
+            </DockPanel>
+        </Border>
+
+        <StackPanel Grid.Row="1" Grid.Column="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <StackPanel Margin="10">
+                <Label Content="Nr. Înmatriculare" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterNr"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Label Content="Marca" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterMarca"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Label Content="Model" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterModel"/>
+            </StackPanel>
+
+            <StackPanel Margin="10">
+                <Label Content="VIN" HorizontalAlignment="Center"/>
+                <TextBox x:Name="FilterVIN"/>
+            </StackPanel>
+
+            <Button Content="Filtrare"
+                    Style="{StaticResource RoundedButton}"
+                    Background="#A9A9A9"
+                    Margin="10"
+                    Click="Filtrare_Click"/>
+        </StackPanel>
+
+        <Border Grid.Row="2" Grid.Column="1"
+                Background="White" CornerRadius="10"
+                Padding="10" BorderBrush="LightGray" BorderThickness="1">
+
+            <DataGrid Name="DataGridVehicule"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      SelectionUnit="FullRow"
+                      CanUserAddRows="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nr. Înmatriculare" Binding="{Binding NumarInmatriculare}" Width="150"/>
+                    <DataGridTextColumn Header="Marca" Binding="{Binding Marca}" Width="130"/>
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="130"/>
+                    <DataGridTextColumn Header="VIN" Binding="{Binding VIN}" Width="200"/>
+                    <DataGridTextColumn Header="Proprietar" Binding="{Binding Client.Nume}" Width="150"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Border>
+
+    </Grid>
+</Window>
