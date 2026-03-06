@@ -157,7 +157,3 @@ User                                (autentificare)
 Proiect realizat ca aplicație de gestiune pentru un autoservice, cu accent pe validări robuste, filtrare flexibilă și interfață prietenoasă.
 
 ---
-
-## 📄 Licență
-
-Acest proiect este distribuit sub licența [MIT](LICENSE).
